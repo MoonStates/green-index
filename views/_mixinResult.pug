@@ -1,0 +1,215 @@
+mixin simpleResult(data, max_charge_serveur, max_complexite, max_bande_passante)
+
+    #accordionFlushExample.accordion-flush.mt-3
+        .accordion-item
+            h2(id="flush-headingOne"+data.ak_website[0]._id).accordion-header
+                button.accordion-button.collapsed(id='btn'+data.ak_website[0]._id style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseOne'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseOne'+data.ak_website[0]._id)
+                    .container
+                        .row.align-items-center
+                            .col.text-start
+                                b(style='font-size: 30px;') Empreinte Environnemental
+
+            div(id="flush-collapseOne"+data.ak_website[0]._id aria-labelledby='flush-headingOne'+data.ak_website[0]._id).accordion-collapse.collapse
+                .accordion-body
+                    .container
+                        .row.d-flex.align-items-center.text-center
+                            .col-4
+                                h5.font-weight-bold Score ecoindex :
+                                canvas(id='foo'+data.ak_website[0]._id).mt-2
+                                h5(id='gauge-value'+data.ak_website[0]._id)
+
+                            .col-4
+                                h5.font-weight-bold Complexité :
+                                canvas(id='foo2'+data.ak_website[0]._id).mt-2
+                                h5(id='gauge-value2'+data.ak_website[0]._id)
+
+                            .col-4
+                                h5.font-weight-bold Charge serveur :
+                                canvas(id='foo3'+data.ak_website[0]._id).mt-2
+                                h5(id='gauge-value3'+data.ak_website[0]._id)
+
+                        .row.p-lg-3.mx-lg-5.d-flex.align-items-center.mt-3
+                            .col
+                                .row.mb-1
+                                    b.font-weight-bold Classement Ecoindex :
+                                if data.classement_ecoindex == "A" || data.classement_ecoindex == "B"
+                                    .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 0);border-radius:4px')
+                                        b.text-center.align-middle
+                                            span #{data.classement_ecoindex}
+                                if data.classement_ecoindex == "C" || data.classement_ecoindex == "D"
+                                    .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(255, 153, 0);border-radius:4px')
+                                        b.text-center.align-middle
+                                            span #{data.classement_ecoindex}
+                                if data.classement_ecoindex == "E" || data.classement_ecoindex == "F" || data.classement_ecoindex == "G"
+                                    .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(255, 0, 0);border-radius:4px')
+                                        b.text-center.align-middle
+                                            span #{data.classement_ecoindex}
+                            .col
+                                .row.mb-1
+                                    b.font-weight-bold Empreinte GES 4G :
+                                .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle
+                                        span #{data.empreinte_ges_mobile_4g} gCO2e
+                            .col
+                                .row.mb-1
+                                    b.font-weight-bold Empreinte GES WiFi :
+                                .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle
+                                        span #{data.empreinte_ges_desktop_wifi} gCO2e
+                            .col
+                                .row.mb-1
+                                    b.font-weight-bold Empreinte Eau :
+                                .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle
+                                        span #{data.empreinte_eau} ml
+                            .col
+                                .row.mb-1
+                                    b.font-weight-bold Temps de chargement :
+                                .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle
+                                        span #{data.temps_chargement} sec
+
+        .accordion-item
+            h2(id="flush-headingTwo"+data.ak_website[0]._id).accordion-header
+                button.accordion-button.collapsed(id='btn2'+data.ak_website[0]._id style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseTwo'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseTwo'+data.ak_website[0]._id)
+                    .container
+                        .row.align-items-center
+                            .col.text-start
+                                b(style='font-size: 30px;') Hébergement
+
+            div(id="flush-collapseTwo"+data.ak_website[0]._id aria-labelledby='flush-headingTwo'+data.ak_website[0]._id).accordion-collapse.collapse
+                .accordion-body
+                    .container
+                        .row.mt-2.d-flex.align-items-center.justify-content-center
+                            if data.type_host == true
+                                .col-5.text-center
+                                    svg.bi.bi-check-circle-fill(xmlns='http://www.w3.org/2000/svg' width='300' height='150' fill='green' viewBox='0 0 16 16')
+                                        path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z')
+                                    h4.mt-3 Hébergement eco-responsable
+                            else
+                                .col-5.text-center
+                                    svg.bi.bi-x-circle-fill(xmlns='http://www.w3.org/2000/svg' width='300' height='150' fill='red' viewBox='0 0 16 16')
+                                        path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z')
+
+                                    h4.mt-3 Hébergement non eco-responsable
+                            .col-5.text-center
+                                .row
+                                    h5.font-weight-bold Bande passante :
+                                    canvas(id='foo4'+data.ak_website[0]._id).mt-2
+                                    h5(id='gauge-value4'+data.ak_website[0]._id)
+                                .row.p-lg-3.mx-lg-5(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle
+                                        span#Requetes  #{data.bande_passante} Ko
+        .accordion-item
+            h2(id="flush-headingThree"+data.ak_website[0]._id).accordion-header
+                button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseThree'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseThree'+data.ak_website[0]._id)
+                    .container
+                        .row.align-items-center
+                            .col.text-start
+                                b(style='font-size: 30px;') Sur une année avec 10.000 visites par mois
+            div(id="flush-collapseThree"+data.ak_website[0]._id aria-labelledby='flush-headingThree'+data.ak_website[0]._id).accordion-collapse.collapse
+                .accordion-body
+                    .container
+                        .row
+                            h4.text-center.fw-bold(style="color: #00B7FF") L'équivalence des émissions de CO2 liées à votre site internet
+                            .col.m-lg-2(style="background: #85C1E9")
+                                .row
+                                    .col-sm-4.text-center
+                                        img(src='/img/car.png' width="150" height="90" style="margin-top:70px")
+
+                                    .col-sm-8.mt-3
+                                        .media__content
+                                            .row.col-sm-6-lg-3
+                                            .stat__header
+                                                h6.mt-3(style="color:#FDFEFE") équivalence des émissions en utilisant le wifi
+                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                    span(id='kmByCar'+data.ak_website[0]._id)
+                                                    p Km/Voiture
+                                            .stat__header
+                                                h6.mt-4(style="color:#FDFEFE") équivalence des émissions en utilisant la 4G
+                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                    span(id='kmByCar2'+data.ak_website[0]._id)
+                                                    p Km/Voiture
+                            .col.m-lg-2(style="background: #85C1E9")
+                                .row
+                                    .col-sm-4.text-center
+                                        img(src='/img/phone.png' width="70" height="100" style="margin-top:70px")
+
+                                    .col-sm-8.mt-3
+                                        .media__content
+                                            .row.col-sm-6-lg-3
+                                            .stat__header
+                                                h6.mt-3(style="color:#FDFEFE") équivalence des émissions en utilisant le wifi
+                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                    span(id="OneChargedSmartphone"+data.ak_website[0]._id)
+                                                    p Téléphones chargés
+                                            .stat__header
+                                                h6.mt-4(style="color:#FDFEFE") équivalence des émissions en utilisant la 4G
+                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                    span(id="OneChargedSmartphone2"+data.ak_website[0]._id)
+                                                    p Téléphones chargés
+        .accordion-item
+            h2(id="flush-headingFour"+data.ak_website[0]._id).accordion-header
+                button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseFour'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseFour'+data.ak_website[0]._id)
+                    .container
+                        .row.align-items-center
+                            .col.text-start
+                                b(style='font-size: 30px;') Comment améliorer l'éco-responsabilité du site
+            div(id="flush-collapseFour"+data.ak_website[0]._id aria-labelledby='flush-headingFour'+data.ak_website[0]._id).accordion-collapse.collapse
+                .accordion-body
+                    .container
+                        .row
+                            .col
+                                .row.p-lg-3.mx-lg-5(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle Changer pour un data center plus éco-responsable
+                            .col
+                                .row.p-lg-3.mx-lg-5(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle Augmenter l'efficience du site
+                            .col
+                                .row.p-lg-3.mx-lg-5(style=' color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
+                                    b.text-center.align-middle Supprimer les erreurs HTML
+        .accordion-item
+            h2(id="flush-headingFive"+data.ak_website[0]._id).accordion-header
+                button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseFive'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseFour'+data.ak_website[0]._id onclick='historique("' + data.ak_website[0]._id + '")')
+                    .container
+                        .row.align-items-center
+                            .col.text-start
+                                b(style='font-size: 30px;') Historiques des analyses du site
+            div(id="flush-collapseFive"+data.ak_website[0]._id aria-labelledby='flush-headingFive'+data.ak_website[0]._id).accordion-collapse.collapse
+                .accordion-body
+                    .container
+                        .row
+                            table#example.display(style='width:100%').table.table-striped.table-bordered.borderTabColor.borderTabColor2.mb-5
+                                thead.inrFontColor
+                                    tr
+                                        th Date
+                                        th Eco Index
+                                        th Complexité
+                                        th Empreinte GES 4G
+                                        th Empreinte GES Wifi
+                                        th Empreinte Eau
+                                tbody(id="toAppend"+data.ak_website[0]._id).whiteFontColor
+                                    tr
+                                        td.text-center(colspan="6")
+                                            .spinner-border.text-primary(role='status')
+                                                span.visually-hidden Loading...
+
+    //script pour creer et afficher les gauges
+    script.
+        var btn = document.getElementById('btn#{data.ak_website[0]._id}');
+        btn.addEventListener("click", function (){
+            gauge(true,100,#{data.ecoindex},'foo#{data.ak_website[0]._id}','gauge-value#{data.ak_website[0]._id}')
+            gauge(false,#{max_complexite},#{data.complexite},'foo2#{data.ak_website[0]._id}','gauge-value2#{data.ak_website[0]._id}')
+            gauge(false,#{max_charge_serveur},#{data.charge_serveur},'foo3#{data.ak_website[0]._id}','gauge-value3#{data.ak_website[0]._id}')
+        });
+        var btn2 = document.getElementById('btn2#{data.ak_website[0]._id}');
+        btn2.addEventListener("click", function () {
+            gauge(false, #{max_bande_passante}, #{data.bande_passante}, 'foo4#{data.ak_website[0]._id}', 'gauge-value4#{data.ak_website[0]._id}')
+        });
+
+    //script pour calculer et afficher l'equivalent en CO2
+    script.
+        document.addEventListener("DOMContentLoaded", getValuekmByCar(#{data.empreinte_ges_desktop_wifi},'kmByCar#{data.ak_website[0]._id}'))
+        document.addEventListener("DOMContentLoaded", getValuekmByCar2(#{data.empreinte_ges_mobile_4g},'kmByCar2#{data.ak_website[0]._id}'));
+        document.addEventListener("DOMContentLoaded", OneChargedSmartphone(#{data.empreinte_ges_desktop_wifi},'OneChargedSmartphone#{data.ak_website[0]._id}'));
+        document.addEventListener("DOMContentLoaded", OneChargedSmartphone2(#{data.empreinte_ges_mobile_4g},'OneChargedSmartphone2#{data.ak_website[0]._id}'));

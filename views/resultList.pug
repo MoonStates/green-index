@@ -1,0 +1,40 @@
+extends layout
+include _mixinResult
+
+block content
+    .container
+        .row.align-items-center.my-5
+            .col.text-center
+                h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128);') Impact environnemental d'une
+                    br
+                    | liste de sites
+
+        #accordionSites.accordion-flush
+            each val in json_return
+                .accordion-item
+                    h2(id="flush-headingSite" + val.list_history[0].ak_website[0]._id).accordion-header
+                        button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseSite' + val.list_history[0].ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseSite' + val.list_history[0].ak_website[0]._id)
+                            .container
+                                .row.align-items-center
+                                    .col.text-start
+                                        b(style='font-size: 30px;') #{val.list_history[0].ak_website[0].url}
+
+                                    .col-4
+                                        .row
+                                            .col-8.text-end
+                                                b(style='color:rgb(0, 0, 0); font-size: 14px') Position dans le classement:
+                                            .col
+                                                .row
+                                                    .col.text-start
+                                                        b(style='font-size: 40px') #{val.classement}
+                                                .row
+                                                    .col.text-start
+                                                        b(style='font-size: 20px') / #{val.nombre_total}
+
+                    div(id="flush-collapseSite"+val.list_history[0].ak_website[0]._id aria-labelledby='flush-headingSite'+val.list_history[0].ak_website[0]._id).accordion-collapse.collapse
+                        .accordion-body
+                            .container
+                                +simpleResult(val.list_history[0],max_charge_serveur, max_complexite, max_bande_passante)
+        ul
+        each element in json_return_false
+            li= element._url

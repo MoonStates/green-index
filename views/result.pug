@@ -1,0 +1,19 @@
+extends layout
+include _mixinResult
+
+block content
+    #singleSite.container
+        .row.align-items-center.my-5
+            .col.text-center
+                h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128);') Impact environnemental de
+                    br
+                    span#NomSite #{list_history[0].ak_website[0].url}
+        .row
+            .col.text-end
+                b(style='color:rgb(0, 0, 0); font-size: 14px') Position dans le classement:
+                b(style='font-size: 40px') #{classement}
+        .row
+            .col.text-end
+                b(style='font-size: 20px') / #{nombre_total}
+
+        +simpleResult(list_history[0],max_charge_serveur,max_complexite,max_bande_passante)

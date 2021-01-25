@@ -1,0 +1,91 @@
+extends layout
+
+block content
+    .container
+        .row.my-5
+            .col.text-center
+                h1.inrFontColor.mb-3 Impact environnemental d'un site internet
+        .row.my-3.justify-content-center
+            .col-lg-7
+                #divFirstForm
+                    form#formLink(action="/processRequest" method="POST").justify-content-center
+                        label(for='linkToAnalyse') Lien du site à analyser :
+                        .input-group.pl-5.pr-5
+                            input#linkToAnalyse.ml-1.form-control(name="resultat_url" type='link' placeholder='Lien au format : http://www.unsite.com/...' required='true')
+                            select.form-select(name='typo' aria-label='form-select example' required='true')
+                                option(selected='' value='') Typologie
+                                if list_typologie
+                                    for item in list_typologie
+                                        option(value=item._id) #{item.libelle}
+                            button#btnAnalyser.btn.btn-success.inrBtnColor(type='submit') Analyser
+        .row.my-3.mb-5.justify-content-center
+            .col-lg-7
+                #divSecondForm
+                    form#formFile(action="/processRequest/file" method="POST" enctype="multipart/form-data").justify-content-center
+                        label(for='customFile') Liste à analyser :
+                        .input-group.pl-5.pr-5
+                            input#customFile.form-control(type='file' name='fileName' required)
+                            button#btnStart.btn.btn-success.inrBtnColor(type='submit') Analyser
+                #loader
+                #textLoader
+                    br
+                    br
+                    .text-center
+                        p Analyse en cours, merci de patienter...
+
+    .container-fluid.bodyBackgroundColor
+        .container.p-5
+            .row.align-items-center.justify-content-center
+                .col-4
+                    h2.whiteFontColor Présentation de l'outil
+                .col-8
+                    p.whiteFontColor Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+            .row.mt-5.text-center
+                .col
+                    h2.whiteFontColor.mb-3 Classement des sites eco-responsables
+                    table#example.display(style='width:100%').table.table-striped.table-bordered.borderTabColor.borderTabColor2
+                        thead.inrFontColor
+                            tr
+                                th Position
+                                th Eco-index
+                                th Site
+                                th Empreinte GES/Wifi (gCO2e)
+                                th Empreinte GES/4G (gCO2e)
+                                th Empreinte Eau (ml)
+                            tbody.whiteFontColor
+                            if list_top_url
+                                -var int = 0;
+                                for item in list_top_url
+                                    -int = int + 1;
+                                    tr
+                                        td   #{int}
+                                        td   #{JSON.parse(item).ecoindex}
+                                        td
+                                            a( href= JSON.parse(item).url) #{JSON.parse(item).url}
+                                        td   #{JSON.parse(item).empreinte_ges_desktop_wifi} gCO2eq
+                                        td   #{JSON.parse(item).empreinte_ges_mobile_4g} gCO2eq
+                                        td   #{JSON.parse(item).empreinte_eau} ml
+
+    script.
+
+        // Fonction pour changer le contenu de t2
+        function displayAll() {
+            let d1 = document.getElementById('divSecondForm');
+            d1.style.display = "none";
+            let d2 = document.getElementById('divFirstForm');
+            d2.style.display = "none";
+            let d3 = document.getElementById('loader');
+            d3.style.display = "block";
+            let d4 = document.getElementById('textLoader');
+            d4.style.display = "block";
+
+        }
+
+
+        // Ajouter un écouteur d'évènements à la table
+        let btnURL = document.getElementById('formLink');
+        btnURL.addEventListener("submit", displayAll, false);
+
+        let btnListURL = document.getElementById('formFile');
+        btnListURL.addEventListener("submit", displayAll, false);
