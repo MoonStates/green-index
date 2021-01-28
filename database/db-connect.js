@@ -8,12 +8,8 @@ require('dotenv').config()
 //Set up default mongoose connection
 //---------------------------------------------------------------------
 const uri = "mongodb+srv://dbUser:dbUser@cluster0.lhcse.mongodb.net/test_db?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true }).then();
+const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-
-
 
 
 //Insertion des libelles
