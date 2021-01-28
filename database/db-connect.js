@@ -6,7 +6,7 @@ require('dotenv').config()
 //---------------------------------------------------------------------
 //Set up default mongoose connection
 //---------------------------------------------------------------------
-const uri = "mongodb+srv://dbUser:<password>@cluster0.lhcse.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const uri = "mongodb+srv://dbUser:dbUser@cluster0.lhcse.mongodb.net/test_db?retryWrites=true&w=majority";
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true}).then();
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
