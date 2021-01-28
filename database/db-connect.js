@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose').MongoClient;
 const typoModel = require('./typologie');
 const paraModel = require('./parametre');
 mongoose.set('useFindAndModify', false);
@@ -7,8 +7,12 @@ require('dotenv').config()
 //Set up default mongoose connection
 //---------------------------------------------------------------------
 const uri = "mongodb+srv://dbUser:dbUser@cluster0.lhcse.mongodb.net/test_db?retryWrites=true&w=majority";
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true}).then();
-mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const client = new MongoClient(uri, { useNewUrlParser: true }).then();
+client.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+
+
 
 
 //Insertion des libelles
