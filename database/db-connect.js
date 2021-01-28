@@ -1,7 +1,7 @@
 const mongoose = require('mongoose').MongoClient;
 const typoModel = require('./typologie');
 const paraModel = require('./parametre');
-mongoose.set('useFindAndModify', false);
+//mongoose.set('useFindAndModify', false);
 require('dotenv').config()
 //---------------------------------------------------------------------
 //Set up default mongoose connection
