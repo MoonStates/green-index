@@ -6,10 +6,8 @@ require('dotenv').config()
 //---------------------------------------------------------------------
 //Set up default mongoose connection
 //---------------------------------------------------------------------
-const mongoDB = 'mongodb://127.0.0.1/second_test_db';
-var uri = process.env.MONGODB_URI || config.dbHostName;
-console.log('===== Connecting to DB ... =====', uri);
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/score-nr-lr', {useNewUrlParser: true, useUnifiedTopology: true}).then();
+const uri = "mongodb+srv://dbUser:<password>@cluster0.lhcse.mongodb.net/<dbname>?retryWrites=true&w=majority";
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true}).then();
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
