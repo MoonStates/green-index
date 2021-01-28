@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
 const typoModel = require('./typologie');
 const paraModel = require('./parametre');
 //mongoose.set('useFindAndModify', false);
@@ -7,9 +6,12 @@ require('dotenv').config()
 //---------------------------------------------------------------------
 //Set up default mongoose connection
 //---------------------------------------------------------------------
-const uri = "mongodb+srv://dbUser:dbUser@cluster0.lhcse.mongodb.net/test_db?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const uri = "mongodb+srv://dbUserdb:dbUserdb@cluster0.lhcse.mongodb.net/test?retryWrites=true&w=majority";
+
+
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true}).then();
+
+
 
 
 //Insertion des libelles
@@ -23,7 +25,7 @@ const array = [
 array.forEach(function(n) {
 
     typoModel.findOneAndUpdate( n, n, { upsert: true }, function(err,doc) {
-        //console.log( doc );
+        //console.log(err);
     });
 
 });
@@ -53,3 +55,4 @@ array_param.forEach(function(n) {
     });
 
 });
+
