@@ -1,0 +1,238 @@
+extends layout
+
+block content
+    .container
+        .row.my-5
+            .col.text-center
+                h1.inrFontColor.mb-3 History of analyzed websites
+        .row.my-1.row-cols-6
+            .col
+                canvas#ScoreNR
+            .col
+                canvas#GESMobile
+            .col
+                canvas#GESWifi
+            .col
+                canvas#Eau
+            .col
+                canvas#Complexite
+            .col
+                canvas#BandePassante
+            .col
+                canvas#TChargement
+            .col-4
+                h3 Average website results in a given period
+                form#chartForm(onsubmit="return false")
+                    .row-mt-3
+                        .col
+                            label.form-label(for='typoHist') Typologies
+                            select#typoHist.form-control.form-select(aria-label='Default select example' onchange='histogramme()')
+                                option(selected='' value='') All
+                                if list_typologie
+                                    for item in list_typologie
+                                        option(value=item._id) #{item.libelle}
+                    .row.my-3
+                        .col
+                            label.form-label(for='dateDebutHist') Start date
+                            input#dateDebutHist.form-control(type='date' onchange='histogramme()')
+                        .col
+                            label.form-label(for='dateFinHist') End date
+                            input#dateFinHist.form-control(type='date' onchange='histogramme()')
+                        .col-12.p-3
+                            button.btn.btn-dark(type="reset") Reset
+
+        form#myForm(onsubmit="return false").row.mt-5
+            .col-md
+                .form-floating
+                    input#dateDebut.form-control(name='dateDebut' type='date')
+                    label(for='dateDebut') Start date
+            .col-md
+                .form-floating
+                    input#dateFin.form-control(name='dateFin' type='date')
+                    label(for='dateFin') End date
+            .col-md
+                .form-floating
+                    select#typologie.form-select(name='typo' aria-label='form-select example')
+                        option(selected='' value='') Typology
+                        option(value='all') All
+                        if list_typologie
+                            for item in list_typologie
+                                option(value=item._id) #{item.libelle}
+                    label(for='typologie') Typologies
+            .col-md-2
+                .form-check
+                    input#distinct.form-check-input(name='meilleurs' type='checkbox')
+                    label.form-check-label(for='distinct') Show only the best result for each website
+            .col-md-2.d-flex.align-items-center.justify-content-center
+                .form-floating
+                    button.btn.inrBtnColor.text-white(onclick='historique()') Search
+            .col-md-1.d-flex.align-items-center.justify-content-center
+                button.btn.bg-dark.text-white(type='reset') Reset
+        table#TableExample(style='width:100%').table.table-striped.table-bordered.borderTabColor.borderTabColor2.mt-2.visually-hidden
+            thead.inrFontColor
+                tr
+                    th Date
+                    th Website
+                    th NR Score
+                    th Complexity
+                    th GHG 4G Footprint
+                    th GHG WiFi Footprint
+                    th Water Footprint
+            tbody(id="toAppend").whiteFontColor
+                tr
+                    td.text-center(colspan="7")
+                        .spinner-border.text-primary(role='status')
+                            span.visually-hidden Loading...
+
+
+    script.
+        function historique() {
+            var typo = null
+            var dateDebut = null;
+            var dateFin = null
+            var distinct = document.getElementById("distinct").checked
+
+            if (document.getElementById("dateDebut").value !== "") {
+                dateDebut = new Date(document.getElementById("dateDebut").value).toISOString()
+            }
+            if (document.getElementById("dateFin").value !== "") {
+                dateFin = new Date(document.getElementById("dateFin").value).toISOString()
+            }
+            if (document.getElementById("typologie").value !== "") {
+                typo = document.getElementById("typologie").value
+            }
+            let httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function () {
+                document.getElementById("TableExample").classList.remove('visually-hidden')
+                if (httpRequest.responseText) {
+                    chargeResultat(JSON.parse(httpRequest.responseText))
+                }
+            };
+
+            if (typo === 'all' && dateDebut === null && dateFin === null)
+                httpRequest.open("GET", '/bi/all/distinct/' + distinct);
+            else if (typo !== 'all' && typo !== null && dateDebut === null && dateFin === null)
+                httpRequest.open("GET", '/bi/typo/' + typo + '/distinct/' + distinct);
+            else if ((typo === 'all' || typo === null) && (dateDebut !== null || dateFin !== null))
+                httpRequest.open("GET", '/bi/dateStart/' + dateDebut + '/dateEnd/' + dateFin + '/distinct/' + distinct);
+            else
+                httpRequest.open("GET", '/bi/typo/' + typo + '/dateStart/' + dateDebut + '/dateEnd/' + dateFin + '/distinct/' + distinct);
+            httpRequest.send();
+
+
+        }
+        function chargeResultat(data) {
+            let tbody = document.getElementById('toAppend')
+            while (tbody.firstChild) tbody.removeChild(tbody.firstChild)
+
+            data.return_json.forEach((item) => {
+                let date = new Date(item.date_analyse)
+                var url;
+                if(item.url)
+                    url = item.url
+                else if(item.ak_website[0].url)
+                    url = item.ak_website[0].url
+                else if(item.websites.url)
+                    url = item.websites.url
+
+
+                tbody.innerHTML +=
+                    '<tr>' +
+                    '<td>' + date.getDate() + '/' + date.getMonth() + 1 + '/' + date.getFullYear() + '</td>' +
+                    '<td>' + url + '</td>' +
+                    '<td>' + item.ecoindex + '</td>' +
+                    '<td>' + item.complexite + ' elements</td>' +
+                    '<td>' + item.empreinte_ges_mobile_4g + ' gCO2eq</td>' +
+                    '<td>' + item.empreinte_ges_desktop_wifi + ' gCO2eq</td>' +
+                    '<td>' + item.empreinte_eau + ' ml</td>' +
+                    '</tr>'
+                })
+        }
+    script.
+        document.addEventListener("DOMContentLoaded",histogramme)
+        function histogramme() {
+            var dateDebutHist = null
+            var dateFinHist = null
+            var typologieHist = null
+
+            if (document.getElementById("dateDebutHist").value !== "") {
+                dateDebutHist = new Date(document.getElementById("dateDebutHist").value).toISOString()
+            }
+            if (document.getElementById("dateFinHist").value !== "") {
+                dateFinHist = new Date(document.getElementById("dateFinHist").value).toISOString()
+            }
+            if (document.getElementById("typoHist").value !== "") {
+                typologieHist = document.getElementById("typoHist").value
+            }
+
+            let httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function () {
+                if (httpRequest.responseText) {
+
+                    var jsonResponse = JSON.parse(httpRequest.responseText).return_chart_json
+                    var ValScoreNR=0, ValGesMobile=0, ValGesWifi=0,ValEau=0,ValComplexite=0, ValBandePassante=0, valTChargement=0;
+                    console.log(JSON.parse(httpRequest.responseText).return_chart_json)
+                    if(jsonResponse.length>0){
+                        ValScoreNR=jsonResponse[0].avgEcoIndexTotal
+                        ValGesMobile=jsonResponse[0].avgEmpreinte_ges_mobile_4gTotal
+                        ValGesWifi=jsonResponse[0].avgEmpreinte_ges_deskop_wifiTotal
+                        ValEau=jsonResponse[0].avgEmpreinte_eauTotal
+                        ValComplexite=jsonResponse[0].avgComplexiteTotal
+                        ValBandePassante=jsonResponse[0].avgBandePassanteTotal
+                        valTChargement=jsonResponse[0].avgTempsChargementTotal
+                    }
+
+                    //indice NR
+                    paintCanvas('ScoreNR','Score NR','%',ValScoreNR,100)
+                    //GES 4g
+                    paintCanvas('GESMobile','4G GHG','gCO2e',ValGesMobile,1)
+                    //GES wifi
+                    paintCanvas('GESWifi','WiFi GHG','gCO2e',ValGesWifi,1)
+                    //eau
+                    paintCanvas('Eau','Water Footprint','ml',ValEau,1)
+                    //Complexité
+                    paintCanvas('Complexite','Complexity','Elements',ValComplexite)
+                    //Bande passante
+                    paintCanvas('BandePassante','Pass-band','mb',ValBandePassante)
+                    //Complexité
+                    paintCanvas('TChargement','Loading Time','seconds',valTChargement,10)
+
+
+                }
+            };
+            httpRequest.open("GET", '/bi/chart/typo/'+typologieHist+'/dateStart/'+dateDebutHist+'/dateEnd/'+dateFinHist);
+            httpRequest.send();
+        }
+
+
+    script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js')
+    script.
+        function paintCanvas(id,label,label2,val, max=100){
+            var parent = document.getElementById(id).parentElement;
+            parent.innerHTML = '&nbsp;';
+            parent.innerHTML = '<canvas id="'+id+'"></canvas>';
+            var ctxGeneral = document.getElementById(id).getContext('2d');
+            var GESGeneral = new Chart(ctxGeneral, {
+                type: 'bar',
+                data: {
+                    labels: [label],
+                    datasets: [
+                        {
+                            label: label2,
+                            backgroundColor: 'rgb(0, 101, 155)',
+                            borderColor: 'rgb(0, 101, 155)',
+                            data: [val]
+                        }
+                    ]
+                },
+
+                options: {
+                    scales: {xAxes: [{ticks: {autoSkip: false,maxRotation: 90,minRotation: 85}}]},
+                    legend:{labels:{boxWidth:0}},
+                    responsive: true, maintainAspectRatio: false, scales: {yAxes: [{ticks: {beginAtZero: true, suggestedMax: max}}]}
+                }
+            });
+            GESGeneral.canvas.parentNode.style.width = '120px';
+            GESGeneral.canvas.parentNode.style.height = '300px';
+            GESGeneral.canvas.parentNode.style.padding = '0px';
+        }

@@ -40,6 +40,7 @@ async function selectTop10() {
                 }
             },
             {$unwind: "$website"},
+            {$sort: {"date_analyse": -1, "_id": -1}},
             {
                 $group: {
                     _id: "$ak_website",
@@ -47,10 +48,10 @@ async function selectTop10() {
                     empreinte_ges_desktop_wifi: {"$first": "$empreinte_ges_desktop_wifi"},
                     empreinte_ges_mobile_4g: {"$first": "$empreinte_ges_mobile_4g"},
                     empreinte_eau: {"$first": "$empreinte_eau"},
-                    url: {"$first": "$website"}
+                    url: {"$first": "$website"},
                 }
             },
-            {$sort: {"ecoindex": -1, "_id": -1}},
+            {$sort: {"ecoindex": -1}},
             {$limit: 10}
 
         ]).exec(function (err, list_history) {

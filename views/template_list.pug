@@ -1,0 +1,40 @@
+include template_mixinResult
+
+doctype html
+html
+    head
+        title=title
+        link(href='/stylesheets/bootstrap.min.css' rel='stylesheet' )
+        link(rel='stylesheet' href='/stylesheets/style.css')
+
+        script(src='/javascripts/bootstrap.bundle.min.js')
+        script(type='text/javascript' charset='utf8' src='/javascripts/comportement.js')
+        script(type='text/javascript' charset='utf8' src='/javascripts/gauge.js')
+
+        block content
+            .container
+                .row.align-items-center.my-5
+                    .col.text-center
+                        h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128);') Environmental impact of
+                            br
+                            | list of sites
+
+                    each val in json_return
+                            h2.container
+                                .row.align-items-center
+                                    .col.text-start
+                                        b(style='font-size: 30px;') #{val.list_history[0].ak_website[0].url}
+                                    .col-4
+                                        .row
+                                            .col-8.text-end
+                                                b(style='color:rgb(0, 0, 0); font-size: 14px') Position in the ranking:
+                                            .col
+                                                .row
+                                                    .col.text-start
+                                                        b(style='font-size: 40px') #{val.classement}
+                                                .row
+                                                    .col.text-start
+                                                        b(style='font-size: 20px') / #{val.nombre_total}
+
+                            div
+                                +simpleResultTemplate(val.list_history[0],max_charge_serveur, max_complexite, max_bande_passante)

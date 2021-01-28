@@ -5,12 +5,15 @@ block content
     .header.pad50.headerBackgroundColor
       .container.mt-3
         .text-center
-          h1.inrFontColor.mb-3 Impact environnemental d'un site internet
+          h1.inrFontColor.mb-3 Environmental impact of a website
+          br
           h2= message
+          br
+          br
           .form-group.justify-content-center.action=''
-            form(action='/' method='GET')
+            form(action=action method='GET')
               .input-group.pl-5.pr-5
-              button#btnAnalyser.btn.btn-success.inrBtnColor(type='submit') Retour accueil
+              button#btnAnalyser.btn.btn-success.inrBtnColor(type='submit') #{button}
 
 
 

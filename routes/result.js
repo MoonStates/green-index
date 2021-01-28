@@ -10,8 +10,12 @@ router.get('/', function(req, res) {
 
 router.get('/:webId', resultController.website_results);
 
-router.get('/historique/:webId', resultController.website_historiques)
+router.get('/historique/:webId', resultController.website_historiques);
 
-router.get('/list/:historyId', resultController.website_results_list)
+router.get('/list/:historyId', resultController.website_results_list);
+
+router.get('/template/:webId', resultController.export_pdf_one);
+
+router.get('/template/list/:historyId', resultController.export_pdf_multiple);
 
 module.exports = router;

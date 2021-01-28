@@ -1,0 +1,240 @@
+doctype html
+html
+    head
+        title=title
+        link(href='/stylesheets/bootstrap.min.css' rel='stylesheet' )
+        link(rel='stylesheet' href='/stylesheets/style.css')
+
+        script(src='/javascripts/bootstrap.bundle.min.js')
+        script(type='text/javascript' charset='utf8' src='/javascripts/comportement.js')
+        script(type='text/javascript' charset='utf8' src='/controllers/indexController.js')
+        script(type='text/javascript' charset='utf8' src='/javascripts/gauge.js')
+
+
+
+    body
+     .bodyBackgroundColor
+        nav.navbar.navbar-expand-lg.navbar-light.bg-white
+            .container.px-5
+                a.navbar-brand(href='/')
+                    img(src='/img/INR-logo-s.jpg' alt='' width='200' )
+                button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                #navbarNav.collapse.navbar-collapse.justify-content-end(style="font-size:16px")
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link.active(aria-current='page' href='/' style="color:#0d3280")
+                                b Home
+                        li.nav-item
+                            a.nav-link(href='/admin/analyse/async' style="color:#0d3280")
+                                b Load CSV
+
+        .container.mt-3
+            .row.mt-5.text-center
+                    h2.whiteFontColor.mb-3 Constant values &nbsp
+                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#filehow' data-toggle='tooltip' data-placement='right')
+                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
+
+            .row.mt-3
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Average time on a web page
+                        br
+                        | (decimal minutes)
+                    .input-group.pl-5.pr-5
+                        input#average_timea.form-control(type='text' name='strValue' placeholder='Old value' autocomplete='off' value=list_param[0].average_time)
+                        input(name='strType' value='average_time' type='hidden')
+                        button#btnAdd1.btn.btn.btn-primary(type='submit') Save
+
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Energy impact for FAN WIFI
+                        br
+                        | (kWh/byte)
+                    .input-group.pl-5.pr-5
+                        input#wifi.form-control(name='strValue' placeholder='Old value' autocomplete='off' value=list_param[0].wifi)
+                        input(name='strType' value='wifi' type='hidden')
+                        button#btnAdd2.btn.btn.btn-primary(type='submit') Save
+
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Energy impact for Mobile Network
+                        br
+                        | (kWh/byte)
+                    .input-group.pl-5.pr-5
+                        input#mobile_network.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value=list_param[0].mobile_network)
+                        input(name='strType' value='mobile_network' type='hidden')
+                        button#btnAdd3.btn.btn.btn-primary(type='submit') Save
+
+            .row.mt-3
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Energy Impact of laptop
+                        br
+                        | (kWh/min)
+                    .input-group.pl-5.pr-5
+                        input#desktop.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value=list_param[0].desktop)
+                        input(name='strType' value='desktop' type='hidden')
+                        button#btnAdd4.btn.btn.btn-primary(type='submit') Save
+
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Energy Impact of smartphone
+                        br
+                        | (kWh/min)
+                    .input-group.pl-5.pr-5
+                        input#mobile.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value=list_param[0].mobile)
+                        input(name='strType' value='mobile' type='hidden')
+                        button#btnAdd5.btn.btn.btn-primary(type='submit') Save
+
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Electricity consumption by Data Centers
+                        br
+                        | (kWh/byte)
+                    .input-group.pl-5.pr-5
+                        input#datacenter.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value=list_param[0].datacenter)
+                        input(name='strType' value='datacenter' type='hidden')
+                        button#btnAdd6.btn.btn.btn-primary(type='submit') Save
+
+            .row.mt-3
+                form(action="/admin/type/value" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Carbon intensity Factor in France
+                        br
+                        | (gCO2e/kWh)
+                    .input-group.pl-5.pr-5
+                        input#france.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value=list_param[0].france)
+                        input(name='strType' value='france' type='hidden')
+                        button#btnAdd7.btn.btn.btn-primary(type='submit') Save
+
+                form(action="/admin/type/value" method="POST").col.mb-3
+                    h5.whiteFontColor
+                        label(for='name') Carbon intensity Factor in World
+                        br
+                        | (gCO2e/kWh)
+                    .input-group.pl-5.pr-5
+                        input#world.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value= list_param[0].world)
+                        input(name='strType' value='world' type='hidden')
+                        button#btnAdd8.btn.btn.btn-primary(type='submit') Save
+                form(action="/admin/type/value" method="POST").col.mb-3
+                    h5.whiteFontColor
+                        label(for='name') Water consumption for 1 Kwh
+                        br
+                        | (liter)
+                    .input-group.pl-5.pr-5
+                        input#consommationWaterFor1Kw.form-control(name='strValue' type='text' placeholder='Old value' autocomplete='off' value= list_param[0].consommationWaterFor1Kw)
+                        input(name='strType' value='consommationWaterFor1Kw' type='hidden')
+                        button#btnAdd9.btn.btn.btn-primary(type='submit') Save
+            .row.mt-3
+                form(action="/admin/reset" method="GET").col.mb-3
+                    h5.whiteFontColor
+                        button.btn.btn.btn-primary(type='submit') Reset all
+
+        hr
+        .container.mt-5.bodyBackgroundColor
+            .row
+                .row.mt-5.text-center
+                    h2.whiteFontColor.mb-3 Typologies list
+                form(action="/admin/newTypo" method="POST").col
+                    h5.whiteFontColor
+                        label(for='name') Typologie
+                    .input-group.pl-5.pr-5
+                        input#name.form-control(name='libelleNewTypo' type='text' placeholder='Enter a typology' autocomplete='off')
+                        button.btn.btn.btn-primary(type='submit') Add
+
+
+
+                form(action='/admin/deleteTypo' method='POST').col
+                    h5.whiteFontColor
+                        label(for='list') Typologies in your database
+                    select.form-select#list(name='libelleDeleteTypo' multiple='' size='8' aria-label='size 8 select example')
+                        if list_typologie
+                            for item in list_typologie
+                                option(value=item._id) #{item.libelle}
+
+
+                    .col.mb-3.mt-2.text-end
+                        button#btnRemove.btn.btn-danger(type='submit') Remove
+
+        #filehow.modal.fade(tabindex='-1' aria-labelledby='scoreNrModalLabel' aria-hidden='true')
+            .modal-dialog
+                .modal-content
+                    .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                        h5#scoreNrModalLabel.modal-title Source of constants
+                        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                    .modal-body
+                        p source 1:
+                            a(href='https://theshiftproject.org/')
+                             | https://theshiftproject.org/
+                        li.id1 Average time on a page web(in decimal minutes)
+                        li.id1 Energy impact for Mobile9*/6 Network (kWh/byte)7
+                        li.id1 Energy impact for FAN WIFI (kWh/byte)
+                        li.id1 Energy Impact of laptop (kWh/min)
+                        li.id1 Energy Impact of smartphone (kWh/min)
+                        li.id1 Electricity consumption by Data Centers (in kWh/byte)
+                        br
+                        p source 2 :
+                            a(href='https://qz.com/1351279/the-hidden-water-footprint-of-fossil-fuel-and-nuclear-power-plants/')
+                                | https://qz.com/1351279/the-hidden-water-footprint-of-fossil-fuel-and-nuclear-power-plants/
+                        li.id1 water consumption for 1 Kwh (in liter)
+                        br
+                        p source 3  :
+                            a(href='https://www.bilans-ges.ademe.fr/')
+                                | https://www.bilans-ges.ademe.fr/ (2020)
+                        li.id1 carbon Intensity Factor in France (gCO2e/kWh)
+                        br
+                        p source 4  :
+                            a(href='https://www.bilans-ges.ademe.fr/')
+                                | https://www.bilans-ges.ademe.fr/ (2020)
+                        li.id1 carbon Intensity Factor in World (gCO2e/kWh)
+                        br
+                        p We averaged the carbon intensity factors for India (912 gCO2e/kWh), USA (522 gCO2e/kWh), China (766 gCO2e/kWh), Russia (384 gCO2e/kWh) and Europe (420 gCO2e/kWh)
+
+
+
+        script.
+            const btnAdd = document.querySelector('#btnAdd');
+            const btnRemove = document.querySelector('#btnRemove');
+            const sb = document.querySelector('#list');
+            const name = document.querySelector('#name');
+
+            btnAdd.onclick = (e) => {
+                e.preventDefault();
+
+                // validate the option
+                if (name.value == '') {
+                    alert('Please enter the name.');
+                    return;
+                }
+                // create a new option
+                const option = new Option(name.value, name.value);
+                // add it to the list
+                sb.add(option, undefined);
+
+                // reset the value of the input
+                name.value = '';
+                name.focus();
+            };
+
+            // remove selected option
+            btnRemove.onclick = (e) => {
+                e.preventDefault();
+
+                // save the selected option
+                let selected = [];
+
+                for (let i = 0; i < sb.options.length; i++) {
+                    selected[i] = sb.options[i].selected;
+                }
+
+                // remove all selected option
+                let index = sb.options.length;
+                while (index--) {
+                    if (selected[index]) {
+                        sb.remove(index);
+                    }
+                }
+            };
+

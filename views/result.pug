@@ -1,19 +1,31 @@
 extends layout
 include _mixinResult
+include modal
 
 block content
+    script(type='text/javascript' charset='utf8' src='/javascripts/comportement.js')
+    script(type='text/javascript' charset='utf8' src='/javascripts/gauge.js')
+
     #singleSite.container
         .row.align-items-center.my-5
             .col.text-center
-                h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128);') Impact environnemental de
+                h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128); word-wrap:break-word;') Environmental impact of
                     br
                     span#NomSite #{list_history[0].ak_website[0].url}
         .row
+            .col
+                form(action='/pdf/'+list_history[0]._id method='get')
+                    h6 Download the report in PDF format :
+                        button.btn(type='submit')
+                            svg#modal_icon_pdf.bi.bi-file-earmark-arrow-down(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                path(d='M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z')
+                                path(d='M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z')
             .col.text-end
-                b(style='color:rgb(0, 0, 0); font-size: 14px') Position dans le classement:
+                b(style='color:rgb(0, 0, 0); font-size: 14px') Position in the ranking:
                 b(style='font-size: 40px') #{classement}
         .row
             .col.text-end
                 b(style='font-size: 20px') / #{nombre_total}
 
         +simpleResult(list_history[0],max_charge_serveur,max_complexite,max_bande_passante)
+        +modal

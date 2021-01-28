@@ -9,4 +9,6 @@ router.post('/', processRequestController.website_results);
 
 router.post('/file', processRequestController.list_website_results);
 
+router.post('/Analyse/Async', processRequestController.analyse_async);
+
 module.exports = router;

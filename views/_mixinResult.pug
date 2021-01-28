@@ -3,68 +3,94 @@ mixin simpleResult(data, max_charge_serveur, max_complexite, max_bande_passante)
     #accordionFlushExample.accordion-flush.mt-3
         .accordion-item
             h2(id="flush-headingOne"+data.ak_website[0]._id).accordion-header
-                button.accordion-button.collapsed(id='btn'+data.ak_website[0]._id style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseOne'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseOne'+data.ak_website[0]._id)
+                button.accordion-button.collapsed(id='btn'+data.ak_website[0]._id style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseOne'+data.ak_website[0]._id aria-expanded='true' aria-controls='flush-collapseOne'+data.ak_website[0]._id)
                     .container
                         .row.align-items-center
-                            .col.text-start
-                                b(style='font-size: 30px;') Empreinte Environnemental
+                            .col.text-start.d-flex.align-content-center
+                                svg.bi.bi-tree(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                    path(d='M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777l-3-4.5zM6.437 4.758A.5.5 0 0 0 6 4.5h-.066L8 1.401 10.066 4.5H10a.5.5 0 0 0-.424.765L11.598 8.5H11.5a.5.5 0 0 0-.447.724L12.69 12.5H3.309l1.638-3.276A.5.5 0 0 0 4.5 8.5h-.098l2.022-3.235a.5.5 0 0 0 .013-.507z')
+                                b(style='font-size: 30px;') &nbsp Environmental footprint
 
-            div(id="flush-collapseOne"+data.ak_website[0]._id aria-labelledby='flush-headingOne'+data.ak_website[0]._id).accordion-collapse.collapse
+            div.show(id="flush-collapseOne"+data.ak_website[0]._id aria-labelledby='flush-headingOne'+data.ak_website[0]._id).accordion-collapse.collapse
                 .accordion-body
                     .container
                         .row.d-flex.align-items-center.text-center
                             .col-4
-                                h5.font-weight-bold Score ecoindex :
+                                h5.font-weight-bold NR Score &nbsp
+                                    svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#scoreNrModal' data-toggle='tooltip' data-placement='right')
+                                        path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                        path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 canvas(id='foo'+data.ak_website[0]._id).mt-2
                                 h5(id='gauge-value'+data.ak_website[0]._id)
 
                             .col-4
-                                h5.font-weight-bold Complexité :
+                                h5.font-weight-bold Complexity &nbsp
+                                    svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#complexiteModal' data-toggle='tooltip' data-placement='right')
+                                        path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                        path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 canvas(id='foo2'+data.ak_website[0]._id).mt-2
                                 h5(id='gauge-value2'+data.ak_website[0]._id)
 
                             .col-4
-                                h5.font-weight-bold Charge serveur :
+                                h5.font-weight-bold  Load average &nbsp
+                                    svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#charge_serveurModal' data-toggle='tooltip' data-placement='right')
+                                        path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                        path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 canvas(id='foo3'+data.ak_website[0]._id).mt-2
                                 h5(id='gauge-value3'+data.ak_website[0]._id)
 
-                        .row.p-lg-3.mx-lg-5.d-flex.align-items-center.mt-3
+                        .row.p-lg-3.mx-lg-5.mt-3
                             .col
-                                .row.mb-1
-                                    b.font-weight-bold Classement Ecoindex :
-                                if data.classement_ecoindex == "A" || data.classement_ecoindex == "B"
+                                .row.mb-1.text-center
+                                    b.font-weight-bold NR Index &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#scoreNrModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
+                                if data.classement_ecoindex === "A" || data.classement_ecoindex === "B"
                                     .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 0);border-radius:4px')
                                         b.text-center.align-middle
                                             span #{data.classement_ecoindex}
-                                if data.classement_ecoindex == "C" || data.classement_ecoindex == "D"
+                                if data.classement_ecoindex === "C" || data.classement_ecoindex === "D"
                                     .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(255, 153, 0);border-radius:4px')
                                         b.text-center.align-middle
                                             span #{data.classement_ecoindex}
-                                if data.classement_ecoindex == "E" || data.classement_ecoindex == "F" || data.classement_ecoindex == "G"
+                                if data.classement_ecoindex === "E" || data.classement_ecoindex === "F" || data.classement_ecoindex === "G"
                                     .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(255, 0, 0);border-radius:4px')
                                         b.text-center.align-middle
                                             span #{data.classement_ecoindex}
                             .col
-                                .row.mb-1
-                                    b.font-weight-bold Empreinte GES 4G :
+                                .row.mb-1.text-center
+                                    b.font-weight-bold GHG 4G Footprint &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#empreinteGES4GModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
                                     b.text-center.align-middle
                                         span #{data.empreinte_ges_mobile_4g} gCO2e
                             .col
-                                .row.mb-1
-                                    b.font-weight-bold Empreinte GES WiFi :
+                                .row.mb-1.text-center
+                                    b.font-weight-bold GHG WiFi Footprint &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#empreinteGESWifiModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
                                     b.text-center.align-middle
                                         span #{data.empreinte_ges_desktop_wifi} gCO2e
                             .col
-                                .row.mb-1
-                                    b.font-weight-bold Empreinte Eau :
+                                .row.mb-1.text-center
+                                    b.font-weight-bold Water Footprint &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#empreinteEauModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
                                     b.text-center.align-middle
                                         span #{data.empreinte_eau} ml
                             .col
-                                .row.mb-1
-                                    b.font-weight-bold Temps de chargement :
+                                .row.mb-1.text-center
+                                    b.font-weight-bold Loading time &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#tempsChargementModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                 .row.p-lg-3.text-center.mx-lg-6.mx-3(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
                                     b.text-center.align-middle
                                         span #{data.temps_chargement} sec
@@ -74,27 +100,40 @@ mixin simpleResult(data, max_charge_serveur, max_complexite, max_bande_passante)
                 button.accordion-button.collapsed(id='btn2'+data.ak_website[0]._id style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseTwo'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseTwo'+data.ak_website[0]._id)
                     .container
                         .row.align-items-center
-                            .col.text-start
-                                b(style='font-size: 30px;') Hébergement
+                            .col.text-start.d-flex.align-items-center
+                                svg.bi.bi-server(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                    path(d='M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z')
+                                    path(d='M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334c-.43.32-.931.58-1.458.79C11.81 7.684 9.967 8 8 8c-1.967 0-3.81-.317-5.21-.876a6.508 6.508 0 0 1-1.457-.79z')
+                                    path(d='M14.667 11.668c-.43.319-.931.578-1.458.789-1.4.56-3.242.876-5.209.876-1.967 0-3.81-.316-5.21-.876a6.51 6.51 0 0 1-1.457-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667v-1.665z')
+                                b(style='font-size: 30px;') &nbsp Hosting
 
             div(id="flush-collapseTwo"+data.ak_website[0]._id aria-labelledby='flush-headingTwo'+data.ak_website[0]._id).accordion-collapse.collapse
                 .accordion-body
                     .container
                         .row.mt-2.d-flex.align-items-center.justify-content-center
-                            if data.type_host == true
+                            if data.type_host === true
                                 .col-5.text-center
                                     svg.bi.bi-check-circle-fill(xmlns='http://www.w3.org/2000/svg' width='300' height='150' fill='green' viewBox='0 0 16 16')
                                         path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z')
-                                    h4.mt-3 Hébergement eco-responsable
+                                    h4.mt-3 Green hosting &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#hebergementModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                             else
-                                .col-5.text-center
+                                .col-5.text-center(data-bs-toggle='modal' data-bs-target='#hebergementModal' data-toggle='tooltip' data-placement='right' title='Pour obtenir les détails du résultat cliquer ici.')
                                     svg.bi.bi-x-circle-fill(xmlns='http://www.w3.org/2000/svg' width='300' height='150' fill='red' viewBox='0 0 16 16')
                                         path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z')
+                                    h4.mt-3  Not eco-responsable hosting &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#hebergementModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
 
-                                    h4.mt-3 Hébergement non eco-responsable
                             .col-5.text-center
                                 .row
-                                    h5.font-weight-bold Bande passante :
+                                    h5.font-weight-bold Pass-band &nbsp
+                                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#bande_passanteModal' data-toggle='tooltip' data-placement='right')
+                                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                                     canvas(id='foo4'+data.ak_website[0]._id).mt-2
                                     h5(id='gauge-value4'+data.ak_website[0]._id)
                                 .row.p-lg-3.mx-lg-5(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
@@ -105,76 +144,87 @@ mixin simpleResult(data, max_charge_serveur, max_complexite, max_bande_passante)
                 button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseThree'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseThree'+data.ak_website[0]._id)
                     .container
                         .row.align-items-center
-                            .col.text-start
-                                b(style='font-size: 30px;') Sur une année avec 10.000 visites par mois
+                            .col.text-start.d-flex.align-items-center
+                                svg.bi.bi-graph-up(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                    path(fill-rule='evenodd' d='M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z')
+                                b(style='font-size: 30px;') &nbsp Over a year with 10.000 visits per month
             div(id="flush-collapseThree"+data.ak_website[0]._id aria-labelledby='flush-headingThree'+data.ak_website[0]._id).accordion-collapse.collapse
                 .accordion-body
                     .container
                         .row
-                            h4.text-center.fw-bold(style="color: #00B7FF") L'équivalence des émissions de CO2 liées à votre site internet
+                            h4.text-center.fw-bold.inrFontColor The equivalence of CO2 emissions linked to your website
                             .col.m-lg-2(style="background: #85C1E9")
                                 .row
                                     .col-sm-4.text-center
-                                        img(src='/img/car.png' width="150" height="90" style="margin-top:70px")
+                                        img(src='/img/car.png' style="margin-top:70px")
 
                                     .col-sm-8.mt-3
                                         .media__content
                                             .row.col-sm-6-lg-3
-                                            .stat__header
-                                                h6.mt-3(style="color:#FDFEFE") équivalence des émissions en utilisant le wifi
-                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
-                                                    span(id='kmByCar'+data.ak_website[0]._id)
-                                                    p Km/Voiture
-                                            .stat__header
-                                                h6.mt-4(style="color:#FDFEFE") équivalence des émissions en utilisant la 4G
-                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
-                                                    span(id='kmByCar2'+data.ak_website[0]._id)
-                                                    p Km/Voiture
+                                                .stat__header
+                                                    h6.mt-3(style="color:#FDFEFE") Equivalence of emissions using wifi :
+                                                    h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                        span(id='kmByCar'+data.ak_website[0]._id)
+                                                        p Km/Car
+                                                .stat__header
+                                                    h6.mt-4(style="color:#FDFEFE") Equivalence of emissions using 4G :
+                                                    h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                        span(id='kmByCar2'+data.ak_website[0]._id)
+                                                        p Km/Car
                             .col.m-lg-2(style="background: #85C1E9")
                                 .row
                                     .col-sm-4.text-center
-                                        img(src='/img/phone.png' width="70" height="100" style="margin-top:70px")
+                                        img(src='/img/phone.png' style="margin-top:70px")
 
                                     .col-sm-8.mt-3
                                         .media__content
                                             .row.col-sm-6-lg-3
-                                            .stat__header
-                                                h6.mt-3(style="color:#FDFEFE") équivalence des émissions en utilisant le wifi
-                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
-                                                    span(id="OneChargedSmartphone"+data.ak_website[0]._id)
-                                                    p Téléphones chargés
-                                            .stat__header
-                                                h6.mt-4(style="color:#FDFEFE") équivalence des émissions en utilisant la 4G
-                                                h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
-                                                    span(id="OneChargedSmartphone2"+data.ak_website[0]._id)
-                                                    p Téléphones chargés
+                                                .stat__header
+                                                    h6.mt-3(style="color:#FDFEFE") Equivalence of emissions using wifi :
+                                                    h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                        span(id="OneChargedSmartphone"+data.ak_website[0]._id)
+                                                        p Charged phones
+                                                .stat__header
+                                                    h6.mt-4(style="color:#FDFEFE") Equivalence of emissions using 4G :
+                                                    h5.stat__heading.text-center.mt-1.fw-bold(style="color:#1B4F72")
+                                                        span(id="OneChargedSmartphone2"+data.ak_website[0]._id)
+                                                        p Charged phones
+
         .accordion-item
             h2(id="flush-headingFour"+data.ak_website[0]._id).accordion-header
                 button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseFour'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseFour'+data.ak_website[0]._id)
                     .container
                         .row.align-items-center
-                            .col.text-start
-                                b(style='font-size: 30px;') Comment améliorer l'éco-responsabilité du site
+                            .col.text-start.d-flex.align-items-center
+                                svg.bi.bi-emoji-smile(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                    path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                                    path(d='M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z')
+
+                                b(style='font-size: 30px;') &nbsp How to improve the site's eco-responsibility
             div(id="flush-collapseFour"+data.ak_website[0]._id aria-labelledby='flush-headingFour'+data.ak_website[0]._id).accordion-collapse.collapse
                 .accordion-body
                     .container
                         .row
                             .col
                                 .row.p-lg-3.mx-lg-5(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
-                                    b.text-center.align-middle Changer pour un data center plus éco-responsable
+                                    b.text-center.align-middle Changing to a more eco-responsible data center
                             .col
                                 .row.p-lg-3.mx-lg-5(style='color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
-                                    b.text-center.align-middle Augmenter l'efficience du site
+                                    b.text-center.align-middle Increase site efficiency
                             .col
                                 .row.p-lg-3.mx-lg-5(style=' color:rgb(255,255,255); font-size:16px; background-color:rgb(0, 107, 161);border-radius:4px')
-                                    b.text-center.align-middle Supprimer les erreurs HTML
+                                    b.text-center.align-middle Remove HTML errors
         .accordion-item
             h2(id="flush-headingFive"+data.ak_website[0]._id).accordion-header
                 button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseFive'+data.ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseFour'+data.ak_website[0]._id onclick='historique("' + data.ak_website[0]._id + '")')
                     .container
                         .row.align-items-center
-                            .col.text-start
-                                b(style='font-size: 30px;') Historiques des analyses du site
+                            .col.text-start.d-flex.align-items-center
+                                svg.bi.bi-clock-history(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                    path(d='M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z')
+                                    path(d='M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z')
+                                    path(d='M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z')
+                                b(style='font-size: 30px;') &nbsp History of site analysis
             div(id="flush-collapseFive"+data.ak_website[0]._id aria-labelledby='flush-headingFive'+data.ak_website[0]._id).accordion-collapse.collapse
                 .accordion-body
                     .container
@@ -183,11 +233,11 @@ mixin simpleResult(data, max_charge_serveur, max_complexite, max_bande_passante)
                                 thead.inrFontColor
                                     tr
                                         th Date
-                                        th Eco Index
-                                        th Complexité
-                                        th Empreinte GES 4G
-                                        th Empreinte GES Wifi
-                                        th Empreinte Eau
+                                        th NR Score
+                                        th Complexity
+                                        th GHG 4G Footprint
+                                        th GHG WiFi Footprint
+                                        th Water Footprint
                                 tbody(id="toAppend"+data.ak_website[0]._id).whiteFontColor
                                     tr
                                         td.text-center(colspan="6")
@@ -196,12 +246,9 @@ mixin simpleResult(data, max_charge_serveur, max_complexite, max_bande_passante)
 
     //script pour creer et afficher les gauges
     script.
-        var btn = document.getElementById('btn#{data.ak_website[0]._id}');
-        btn.addEventListener("click", function (){
-            gauge(true,100,#{data.ecoindex},'foo#{data.ak_website[0]._id}','gauge-value#{data.ak_website[0]._id}')
-            gauge(false,#{max_complexite},#{data.complexite},'foo2#{data.ak_website[0]._id}','gauge-value2#{data.ak_website[0]._id}')
-            gauge(false,#{max_charge_serveur},#{data.charge_serveur},'foo3#{data.ak_website[0]._id}','gauge-value3#{data.ak_website[0]._id}')
-        });
+        gauge(true,100,#{data.ecoindex},'foo#{data.ak_website[0]._id}','gauge-value#{data.ak_website[0]._id}')
+        gauge(false,#{max_complexite},#{data.complexite},'foo2#{data.ak_website[0]._id}','gauge-value2#{data.ak_website[0]._id}')
+        gauge(false,#{max_charge_serveur},#{data.charge_serveur},'foo3#{data.ak_website[0]._id}','gauge-value3#{data.ak_website[0]._id}')
         var btn2 = document.getElementById('btn2#{data.ak_website[0]._id}');
         btn2.addEventListener("click", function () {
             gauge(false, #{max_bande_passante}, #{data.bande_passante}, 'foo4#{data.ak_website[0]._id}', 'gauge-value4#{data.ak_website[0]._id}')

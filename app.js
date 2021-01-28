@@ -16,6 +16,9 @@ const dbMongo = require('./database/db-connect')
 const indexRouter = require('./routes/index');
 const resultRouter = require('./routes/result');
 const processRouter = require('./routes/processRequest');
+const biHistoRouter = require('./routes/biHisto');
+const adminRouter = require('./routes/admin');
+const pdfRouter = require('./routes/pdf');
 
 //---------------------------------------------------------------------
 // Creating the app
@@ -44,6 +47,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 app.use('/processRequest', processRouter);
 app.use('/result', resultRouter);
+app.use('/bi', biHistoRouter)
+app.use('/about',(req,res)=>{res.render('aboutpage')})
+app.use('/admin',adminRouter);
+app.use('/pdf', pdfRouter);
 
 //---------------------------------------------------------------------
 // Handler methods for errors and HTTP 404 responses
@@ -53,7 +60,6 @@ app.use(function (req, res, next) {
     next(createError(404));
 });
 
-
 // error handler
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
@@ -62,7 +68,11 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('error', {
+        message: '404 - The requested URL was not found on this server. That\'s all we know',
+        button: 'Home',
+        action: '/'
+    });
 });
 
 //---------------------------------------------------------------------

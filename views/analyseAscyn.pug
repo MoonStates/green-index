@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+        title=title
+        link(href='/stylesheets/bootstrap.min.css' rel='stylesheet' )
+        link(rel='stylesheet' href='/stylesheets/style.css')
+
+        script(src='/javascripts/bootstrap.bundle.min.js')
+        script(type='text/javascript' charset='utf8' src='/javascripts/comportement.js')
+        script(type='text/javascript' charset='utf8' src='/controllers/indexController.js')
+        script(type='text/javascript' charset='utf8' src='/javascripts/gauge.js')
+
+
+
+    body
+        nav.navbar.navbar-expand-lg.navbar-light.bg-white
+            .container.px-5
+                a.navbar-brand(href='/')
+                    img(src='/img/INR-logo-s.jpg' alt='' width='200' )
+                button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                #navbarNav.collapse.navbar-collapse.justify-content-end(style="font-size:16px")
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link.active(aria-current='page' href='/' style="color:#0d3280")
+                                b Home
+                        li.nav-item
+                            a.nav-link(href='/admin/analyse/async' style="color:#0d3280")
+                                b Load CSV
+
+block content
+    .container
+        .row.my-5
+            .col.text-center
+                h1.inrFontColor.mb-3 Environmental impact of a website
+        .row.my-3.mb-5.justify-content-center
+            .col-lg-7
+                #divSecondForm
+                    form#formFile(action="/processRequest/Analyse/Async" method="POST" enctype="multipart/form-data").justify-content-center
+                        label(for='customFile') List to analyze :
+                        .input-group.pl-5.pr-5
+                            input#customFile.form-control(type='file' name='fileName' required)
+                            button#btnStart.btn.btn-success.inrBtnColor(type='submit') Analyze
+

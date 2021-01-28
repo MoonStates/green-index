@@ -1,25 +1,92 @@
 extends layout
 
 block content
-    .container
-        .row.my-5
-            .col.text-center
-                h1.inrFontColor.mb-3 Comment ça fonctionne ?
+    .container.text-center
+        h1.inrFontColor.mb-3 Documentation
+    .container-fluid
+        .container.p-2
+            .row.justify-content-center.text-center.mt-4
+                    .bg-white.py-5.px-4
+                        h3.inrFontColor How does the NR Score work?
+                        p.id0.mb-0 You provide a URL to NR Score which loads it into a real browser on the server side. We measure the application footprint (number of DOM elements, number of requests, etc.) as well as the resulting physical footprint (processor / CPU and RAM / RAM consumption, quantity of data exchanged, etc.). We add some of these parameters into our algorithm to calculate the performance and the environmental footprint.
+                        p
+                        h3.inrFontColor.mt-2 NR Score
+                        p.id0 NR score is a score out of 100. The higher the score is, the better the environmental performance is. We chose this representation because it is the most commonly used on the web to assess other dimensions such as quality, performance, accessibility, etc.
+                        p.id0 The bounds of the EcoIndex scale (0 to 100) were developed and validated by analyzing the HTTP archive database (500,000 URLs).
+                        p.id0 The NR score is calculated from three objective physical measures: size of the DOM, KB transferred, number of HTTP requests. These three indicators are associated via a weighted average with 3 for the DOM, 2 for HTTP requests and 1 for the weight of the data transferred.
+                        p.id0 Afin de prendre en compte la disparité dans les mesures des 3 indicateurs (DOM, Ko, requêtes HTTP), nous positionnons la valeur constatée (DOM, req. HTTP, Ko) dans un quantile.
+                        figure.justify-content-center
+                            img.w-75.fit-picture(src='/img/score-nr-min.png' alt='Formule score NR')
+                            figcaption With : Qtil: Page weight in bytes and K_x: Conversion factor of the usage in energy consumed.
+                        h3.inrFontColor.pt-5 NR index (rating from A to G)
+                        p Once the NR score is obtained, we rank this value by a scale from A to G (European standard) and we obtain a rank.
 
-            h3 score ecoindex + Classement
-            h3 complexite
-            p Le nombre d’éléments du DOM témoigne de la complexité du site et donc, a priori, des efforts à faire par le navigateur pour afficher la page. Plus le site est complexe et plus il faut de puissance (notamment CPU) pour l’afficher. Et plus on contribue à raccourcir la durée de vie de l’ordinateur sur lequel il s’exécute. A l’inverse, un site particulièrement simple et léger contribue à allonger la durée de vie de l’équipement car il nécessite peu de mémoire et un “petit” processeur.
-            h3 charge serveur
-            p Le nombre de requêtes HTTP donne une bonne idée de la charge serveur. Pour le dire vite et de façon caricaturale, en attendant la généralisation de HTTP/2, plus le nombre de requêtes est important pour une même page et plus il faudra de serveurs pour servir cette page.
-            h3 empreinte ges
-            h3 empreinte eau
-            h3 temps de chargement
-            p En moyenne, un internaute ne doit pas attendre plus de 3 secondes pour que les pages de votre site se chargent. Si c’est le cas, il aura tendance à avoir une mauvaise image de votre marque et sera alors enclin à quitter votre site pour retourner à la page de recherche afin d’atteindre un site plus performant. L’amélioration de la vitesse de chargement permet la rétention des visiteurs et augmente ainsi le taux de conversion, par exemple les inscriptions à votre newsletter ou ses achats.
-            h3 hébergement
-            p Votre herbergement est identifié par /www.thegreenwebfoundation.org/
-            h3 bande passante
-            p Le poids des données transférées (Ko) témoigne des efforts à faire pour transporter la page jusqu’au navigateur. Une connexion 4G nécessite jusqu’à 23 fois plus d’énergie pour transporter la même quantité de données qu’une connexion ADSL.
-            h3 Equivalence des émissions de CO2
-            h3 position dans le classement
-            p position du site web testé par rapport aux autres sites qui ont été testés. Le classement est determiné en fonction de l'eco
+        .row.justify-content-center.text-center
+            .col-6.text-center.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor GHG Footprint (WiFi and 4G)
+                    p.id0.mb-0 To calculate the power consumption, we used the "1byte" model.
+                    p.id0 Source :&nbsp
+                        a(href='https://theshiftproject.org/carbonalyser-extension-navigateur/') The Shift Project
+                    br
+                    p.id0 The calculated electricity consumption is translated into greenhouse gas emissions based on the emission factor of the selected geographical area (here France).
+                    p.id0 The emission factor reflects the carbon intensity of electricity production, given the electricity mix in force in the geographical area:
+                    figure.justify-content-center
+                        img.w-100.fit-picture(src='/img/gesre-min.png' alt='Formule score NR')
+                        figcaption  With : P: Page weight in bytes, T: Average time spent per page on the site in minutes (default value = 2.31667 min), K_x: Conversion factor of the usage in energy consumed and F_x: Emission factor of the electricity of a region.
+            .col-6.text-center.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor   Water footprint
+                    p.id0.mb-0 This indicator represents the water spent to load a website. For this, we have taken as a measure: 4 Litre = 1KW/h.
+                    p.id0 Source :
+                        li.id1
+                            a(href='https://qz.com/1351279/the-hidden-water-footprint-of-fossil-fuel-and-nuclear-power-plants/')
+                                | qz.com
+                        li.id1
+                            a(href='https://spectrum.ieee.org/energy/environment/how-much-water-does-it-take-to-make-electricity')
+                                | spectrum.ieee.org
+                        p
+                        p.id0  We used the following formula to calculate the electricity consumption in kWh of a site :
+                        figure.justify-content-center
+                            img.w-100.fit-picture(src='/img/eaure-min.png' alt='Formule KW/H total')
+                            figcaption With : P: Page weight in bytes, T: Average time spent per page on the site in minutes (default value = 2.31667 min) and K_x: Conversion factor from usage to energy consumption.
+
+        .row.justify-content-center.text-center
+            .col.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor  Pass-band
+                    p.id0 The pass-band corresponds to the weight of the transferred data (KB). It indicates the effort required to transport the page to the browser. For information, a 4G connection requires up to 23 times more energy to transport the same amount of data as a WIFI connection.
+                    a(href='https://www.greenit.fr/2016/03/15/internet-mobile-la-4g-est-elle-une-abomination-energetique/#:~:text=Selon%20une%20%C3%A9tude%20de%20l,qu\'en%20Wi%2DFi\'' target='_blank')
+                        | Source : Greenit
+            .col.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor  Load average
+                    p.id0 The number of HTTP requests gives a good idea of the server load. To say it quickly and in a caricatured way, while waiting for the generalization of HTTP/2, the higher the number of requests is for the same page, the more servers will be needed to serve this page.
+
+            .col.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor Hosting
+                    p.id0.mb-0  This indicator shows if your website is hosted in a certified green environment. We identify the type of host via the site api:
+                    a(href='https://www.thegreenwebfoundation.org/' target='_blank')
+                        | thegreenwebfoundation
+
+            .col.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor   Position in the ranking
+                    p.id0 We calculate the rank of the analysis of a website in regards to the NR score base. The ranking is made on the totality of the most up to date analyses of each website.
+
+
+
+        .row.justify-content-center.text-center
+            .col.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor CO2 emission equivalence
+                    p.id0  Compared to the GHG footprints (with Wifi or with 4G), a projection is made over a year with 10,000 visits per month. Two equivalences are deducted: The number of Km per car and the number of phones charged.
+
+            .col.border
+                .py-5.px-5(style="height:100%")
+                    h3.inrFontColor  Complexity
+                    p.id0  The number of elements in the DOM reflects the complexity of the website and therefore, a priori, the effort required by the browser to display the page. The more complex the site is, the more power (especially CPU) is required to display it. And the more you contribute to shorten the lifetime of the computer on which it runs. Conversely, a particularly simple and lightweight website contributes to extend the life of the equipment because it requires little memory and a "small" processor.
+
+
 

@@ -1,35 +1,3 @@
-document.addEventListener("DOMContentLoaded", functions);
-
-function functions(){
-    eventsDOM();
-}
-
-function eventsDOM(){
-    //var accueil = document.getElementById("accueil");
-    //var resultat = document.getElementById("resultat");
-    //var multipleSites = document.getElementById("multipleSites");
-
-    //multipleSites.style.display="none";
-    //resultat.style.display="none";
-
-    /*document.getElementById('d').addEventListener('click', function() {
-        //multipleSites.style.display="block";
-        //accueil.style.display="none";
-        //var site =document.getElementById("linkToAnalyse").value;
-
-        var httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = function(data) {
-            if(httpRequest.responseText){
-                chargeResultat(JSON.parse(httpRequest.responseText))
-            }
-        };
-        httpRequest.open("POST", '/result/historique/');
-        httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-        httpRequest.send(JSON.stringify({site:"test"}));
-        
-    })*/
-}
-
 function historique(id){
     let httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function(data) {
@@ -47,7 +15,7 @@ function chargeResultat(data,id){
         let date = new Date(item.date_analyse)
         tbody.innerHTML +=
             '<tr>' +
-            '<td>'+date.getDay()+'/'+date.getMonth()+1+'/'+date.getFullYear()+'</td>' +
+            '<td>'+date.getDate()+'/'+date.getMonth()+1+'/'+date.getFullYear()+' '+date.getHours()+':'+date.getMinutes()+'</td>' +
             '<td>'+item.ecoindex+'</td>' +
             '<td>'+item.complexite+' elements</td>' +
             '<td>'+item.empreinte_ges_mobile_4g+' gCO2eq</td>' +

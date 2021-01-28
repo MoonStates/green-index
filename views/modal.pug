@@ -1,0 +1,82 @@
+mixin modal
+    // Modals
+    #scoreNrModal.modal.fade(tabindex='-1' aria-labelledby='scoreNrModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#scoreNrModalLabel.modal-title The Responsible Numerical score
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p  The NR Score (Responsible Numerical Score) is an indicator that allows the environmental impact of the website to be assessed. It varies between 0 and 100, the higher the score, the more eco-responsible the analyzed site is. The NR indicator classifies a site according to 5 categories (A, B, C, D, E, F, G), from the lowest to the highest impact.
+    #complexiteModal.modal.fade(tabindex='-1' aria-labelledby='complexiteModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#complexiteModalLabel.modal-title The complexity
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p The complexity of a web page is an indicator defined by the number of elements (example: HTML tags) that compose it. The more elements the web site has, the more complex it will be.
+    #charge_serveurModal.modal.fade(tabindex='-1' aria-labelledby='charge_serveurModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#charge_serveurModalLabel.modal-title The server load
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p A website can be brought to make requests to other websites to get new features, plugins, ... It goes without saying that these requests consume, the server load indicates the number of requests made by a website. The more a site has a high server load, the more it will consume.
+
+    #empreinteGES4GModal.modal.fade(tabindex='-1' aria-labelledby='empreinteGES4GModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#empreinteGES4GModalLabel.modal-title The 4G GHG carbon footprint
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p The 4G GHG carbon footprint is an indicator that represents the quantity of greenhouse gases (GHG), induced by the consultation of the website via the 4G network.
+
+    #empreinteGESWifiModal.modal.fade(tabindex='-1' aria-labelledby='empreinteGESWifiModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#empreinteGESWifiModalLabel.modal-title The WiFi GHG carbon footprint
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p The WiFi GHG carbon footprint is an indicator that represents the quantity of greenhouse gases (GHG), induced by the consultation of the website via the WiFi network.
+
+    #empreinteEauModal.modal.fade(tabindex='-1' aria-labelledby='empreinteEauModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#empreinteEauModalLabel.modal-title The water footprint
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p The water footprint is an indicator that represents the water that is spent to generate the website.
+
+
+
+    #tempsChargementModal.modal.fade(tabindex='-1' aria-labelledby='tempsChargementModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#tempsChargementModalLabel.modal-title The loading time
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p  The loading time indicates the number of seconds it takes for a web page to load for a user. On average, an Internet user should not wait more than 3 seconds for a page to load. It is important for a site to have short loading times to avoid that the user has a bad experience and therefore avoid making him leave.
+
+    #hebergementModal.modal.fade(tabindex='-1' aria-labelledby='hebergementModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#herbegementModalLabel.modal-title Eco-responsible housing
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p  Eco-responsible housing is an indicator that indicates whether the website is hosted in an ecological data center or not.
+
+    #bande_passanteModal.modal.fade(tabindex='-1' aria-labelledby='bande_passanteModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#bande_passanteModalLabel.modal-title Pass-band
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p  Pass-band is an indicator of the amount of data that can be transferred from one point in a network to another within a defined period of time. Generally, it is expressed as a bit rate, measured in bits per second (bps) (K = kilo = 1,000 bits).

@@ -31,8 +31,6 @@ a {
   background-color: white !important;
 }
 
-
-
 .bodyBackgroundColor{
   background-color: #02659b !important;
 }
@@ -56,8 +54,6 @@ a {
   border-radius: 0 !important;
 }
 
-
-
 .progress .progress-bar{
   position: relative;
   -webkit-animation: animate-positive 2s;
@@ -75,6 +71,41 @@ a {
   display: block;
   text-align: center;
 }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+#modal_icon:hover {
+  fill: forestgreen;
+}
+
+#modal_icon_pdf:hover {
+  fill: #0d3280 !important;
+}
+
 /*
 This is use for the loading screen
 */
@@ -96,4 +127,48 @@ This is use for the loading screen
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+
+/*page about us*/
+.social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #555;
+}
+
+/*all paragraphs*/
+p.id0 {
+  text-align: justify;
+}
+
+li.id1 {
+  text-align: justify;
+}
+
+
+figure {
+  flex-flow: column;
+  padding: 5px;
+  margin: auto;
+}
+
+figcaption{
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 12px;
+  text-shadow: none;
 }

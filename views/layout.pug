@@ -6,10 +6,6 @@ html
         link(rel='stylesheet' href='/stylesheets/style.css')
 
         script(src='/javascripts/bootstrap.bundle.min.js')
-        script(type='text/javascript' charset='utf8' src='/javascripts/comportement.js')
-        script(type='text/javascript' charset='utf8' src='/controllers/indexController.js')
-        script(type='text/javascript' charset='utf8' src='/javascripts/gauge.js')
-
 
     body
         nav.navbar.navbar-expand-lg.navbar-light.bg-white
@@ -22,12 +18,16 @@ html
                     ul.navbar-nav
                         li.nav-item
                             a.nav-link.active(aria-current='page' href='/' style="color:#0d3280")
-                                b Accueil
+                                b Home
                         li.nav-item
                             a.nav-link(href='/documentation' style="color:#0d3280")
                                 b Documentation
                         li.nav-item
                             a.nav-link(href='/bi' style="color:#0d3280")
-                                b Historiques
+                                b History
+
+                        li.nav-item
+                            a.nav-link(href='/about' style="color:#0d3280")
+                                b About us
 
         block content

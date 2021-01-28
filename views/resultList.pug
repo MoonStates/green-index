@@ -1,24 +1,38 @@
 extends layout
 include _mixinResult
+include modal
 
 block content
+    script(type='text/javascript' charset='utf8' src='/javascripts/comportement.js')
+    script(type='text/javascript' charset='utf8' src='/javascripts/gauge.js')
+        
     .container
         .row.align-items-center.my-5
             .col.text-center
-                h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128);') Impact environnemental d'une
+                h1(style='font-size: 48px; font-weight: bold; color:rgb(13, 50, 128);') Environmental impact of
                     br
-                    | liste de sites
+                    | list of sites
+        .row
+            .col
+                form(action='/pdf/list/' + id_historique method='get')
+                    h6 Download the report in PDF format :
+                        button.btn(type='submit')
+                            svg#modal_icon_pdf.bi.bi-file-earmark-arrow-down(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                path(d='M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z')
+                                path(d='M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z')
 
         #accordionSites.accordion-flush
             each val in json_return
                 .accordion-item
                     h2(id="flush-headingSite" + val.list_history[0].ak_website[0]._id).accordion-header
-                        button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseSite' + val.list_history[0].ak_website[0]._id aria-expanded='false' aria-controls='flush-collapseSite' + val.list_history[0].ak_website[0]._id)
+                        button.accordion-button.collapsed(style="color:rgb(13, 50, 128);" type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseSite' + val.list_history[0].ak_website[0]._id aria-expanded='true' aria-controls='flush-collapseSite' + val.list_history[0].ak_website[0]._id)
                             .container
                                 .row.align-items-center
                                     .col.text-start
+                                        svg.bi.bi-link-45deg(xmlns='http://www.w3.org/2000/svg' width='35' height='35' fill='currentColor' viewBox='0 0 16 16')
+                                            path(d='M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z')
+                                            path(d='M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z')
                                         b(style='font-size: 30px;') #{val.list_history[0].ak_website[0].url}
-
                                     .col-4
                                         .row
                                             .col-8.text-end
@@ -31,10 +45,18 @@ block content
                                                     .col.text-start
                                                         b(style='font-size: 20px') / #{val.nombre_total}
 
-                    div(id="flush-collapseSite"+val.list_history[0].ak_website[0]._id aria-labelledby='flush-headingSite'+val.list_history[0].ak_website[0]._id).accordion-collapse.collapse
+                    div.show(id="flush-collapseSite"+val.list_history[0].ak_website[0]._id aria-labelledby='flush-headingSite'+val.list_history[0].ak_website[0]._id).accordion-collapse.collapse
                         .accordion-body
                             .container
                                 +simpleResult(val.list_history[0],max_charge_serveur, max_complexite, max_bande_passante)
-        ul
-        each element in json_return_false
-            li= element._url
+            +modal
+
+        if(json_return_false.length>0)
+            .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+                |On n'as pas pu acceder analyser les sites suivants:
+                ul.mt-2
+                    each element in json_return_false
+                        li #{element._url}
+                button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+

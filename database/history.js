@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const historiesSchema = new Schema({
     ak_website: [{ type: Schema.ObjectId, ref: 'websites' }],
-    date_analyse: {type: Date, default: Date.now()},
+    date_analyse: {type: Date},
     ecoindex: {type: Number},
     classement_ecoindex: {type: String},
     empreinte_ges_mobile_4g: {type: Number},

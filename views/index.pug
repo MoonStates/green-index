@@ -4,55 +4,60 @@ block content
     .container
         .row.my-5
             .col.text-center
-                h1.inrFontColor.mb-3 Impact environnemental d'un site internet
+                h1.inrFontColor.mb-3 Environmental impact of a website
         .row.my-3.justify-content-center
             .col-lg-7
                 #divFirstForm
                     form#formLink(action="/processRequest" method="POST").justify-content-center
-                        label(for='linkToAnalyse') Lien du site à analyser :
-                        .input-group.pl-5.pr-5
-                            input#linkToAnalyse.ml-1.form-control(name="resultat_url" type='link' placeholder='Lien au format : http://www.unsite.com/...' required='true')
+                        label(for='linkToAnalyse') Link to analyze :
+                        .input-group.pl-5.pr-5.mt-2
+                            input#linkToAnalyse.ml-1.form-control(name="resultat_url" type='link' placeholder='Format link : http://www.website.com/...' required='true')
                             select.form-select(name='typo' aria-label='form-select example' required='true')
-                                option(selected='' value='') Typologie
+                                option(selected='' value='') Typology
                                 if list_typologie
                                     for item in list_typologie
                                         option(value=item._id) #{item.libelle}
-                            button#btnAnalyser.btn.btn-success.inrBtnColor(type='submit') Analyser
+                            button#btnAnalyser.btn.btn-success.inrBtnColor(type='submit') Analyze
         .row.my-3.mb-5.justify-content-center
             .col-lg-7
                 #divSecondForm
+                    label List to analyze &nbsp
+                        svg#modal_icon.bi.bi-info-circle(xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='currentColor' viewBox='0 0 16 16' data-bs-toggle='modal' data-bs-target='#filehow' data-toggle='tooltip' data-placement='right')
+                            path(d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z')
+                            path(d='M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z')
                     form#formFile(action="/processRequest/file" method="POST" enctype="multipart/form-data").justify-content-center
-                        label(for='customFile') Liste à analyser :
-                        .input-group.pl-5.pr-5
+                        .input-group.pl-5.pr-5.mt-2
                             input#customFile.form-control(type='file' name='fileName' required)
-                            button#btnStart.btn.btn-success.inrBtnColor(type='submit') Analyser
+                            button#btnStart.btn.btn-success.inrBtnColor(type='submit') Analyze
                 #loader
                 #textLoader
                     br
                     br
                     .text-center
-                        p Analyse en cours, merci de patienter...
+                        p Analysis in progress, please wait ...
 
     .container-fluid.bodyBackgroundColor
         .container.p-5
             .row.align-items-center.justify-content-center
                 .col-4
-                    h2.whiteFontColor Présentation de l'outil
+                    h2.whiteFontColor Presentation of the tool
                 .col-8
-                    p.whiteFontColor Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
+                    p.whiteFontColor
+                        |Our tool makes it possible to measure the environmental impact of a website, to determine this, our analyzes are based on several metrics (see details&nbsp
+                        a(href = "documentation") here
+                        |). Our metrics allow us to deduce, for a website, the electricity consumption, the CO2 emissions, etc ... It is an individual awareness support, which helps to visualize the consumption linked to the websites that you use and / or maintain.
             .row.mt-5.text-center
-                .col
-                    h2.whiteFontColor.mb-3 Classement des sites eco-responsables
+                .col.table-responsive
+                    h2.whiteFontColor.mb-3 Ranking of environmentally responsible websites
                     table#example.display(style='width:100%').table.table-striped.table-bordered.borderTabColor.borderTabColor2
                         thead.inrFontColor
                             tr
-                                th Position
-                                th Eco-index
-                                th Site
-                                th Empreinte GES/Wifi (gCO2e)
-                                th Empreinte GES/4G (gCO2e)
-                                th Empreinte Eau (ml)
+                                th Rank
+                                th NR Score
+                                th Website
+                                th GHG/Wifi footprint (gCO2e)
+                                th GHG/4G footprint (gCO2e)
+                                th Water footprint  (ml)
                             tbody.whiteFontColor
                             if list_top_url
                                 -var int = 0;
@@ -67,8 +72,20 @@ block content
                                         td   #{JSON.parse(item).empreinte_ges_mobile_4g} gCO2eq
                                         td   #{JSON.parse(item).empreinte_eau} ml
 
-    script.
+    #filehow.modal.fade(tabindex='-1' aria-labelledby='scoreNrModalLabel' aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header(style="background-color:rgb(0, 107, 161)").text-white
+                    h5#scoreNrModalLabel.modal-title File format
+                    button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    p To analyze a file, it must be in .txt format and respect the following format :
+                    p link,typology
+                    p https://www.facebook.com/,Social network
+                    p https://twitter.com/,Social network
+                    p https://www.santepubliquefrance.fr/,Public service
 
+    script.
         // Fonction pour changer le contenu de t2
         function displayAll() {
             let d1 = document.getElementById('divSecondForm');
@@ -89,3 +106,6 @@ block content
 
         let btnListURL = document.getElementById('formFile');
         btnListURL.addEventListener("submit", displayAll, false);
+
+
+
