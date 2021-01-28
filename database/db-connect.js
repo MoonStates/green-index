@@ -1,4 +1,5 @@
-const mongoose = require('mongoose').MongoClient;
+const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const typoModel = require('./typologie');
 const paraModel = require('./parametre');
 //mongoose.set('useFindAndModify', false);
