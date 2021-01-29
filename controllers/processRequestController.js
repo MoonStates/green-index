@@ -251,7 +251,12 @@ async function updateListResult(list_of_id_to_add, list_of_url_to_add,id_list_re
 async function resultCall(urlWeb, parameters) {
     return new Promise(async function (resolve, reject) {
         let url = urlWeb;
-        let browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            'args' : [
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
+            ]
+        });
         let page = await browser.newPage();
 
         // get number of external requests
