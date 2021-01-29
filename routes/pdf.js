@@ -64,7 +64,7 @@ async function getListOfHistoryID(idTable) {
 
 async function pdf(url, req) {
     const filename = `public/temp/scoreNR-${req.params.webid}.pdf`;
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
 
     await page.goto(process.env.URI_WEB + 'result/template/' + url, {waitUntil: 'networkidle2'});
@@ -83,7 +83,7 @@ async function pdf(url, req) {
 
 async function pdf_list(url, req) {
     const filename = `public/temp/scoreNR-${req.params.idTable}.pdf`;
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
 
     await page.goto(process.env.URI_WEB + 'result/template/list/' + url, {waitUntil: 'networkidle2'});
