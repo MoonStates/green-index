@@ -14,9 +14,9 @@ block content
                         p.id0 NR score is a score out of 100. The higher the score is, the better the environmental performance is. We chose this representation because it is the most commonly used on the web to assess other dimensions such as quality, performance, accessibility, etc.
                         p.id0 The bounds of the EcoIndex scale (0 to 100) were developed and validated by analyzing the HTTP archive database (500,000 URLs).
                         p.id0 The NR score is calculated from three objective physical measures: size of the DOM, KB transferred, number of HTTP requests. These three indicators are associated via a weighted average with 3 for the DOM, 2 for HTTP requests and 1 for the weight of the data transferred.
-                        p.id0 Afin de prendre en compte la disparité dans les mesures des 3 indicateurs (DOM, Ko, requêtes HTTP), nous positionnons la valeur constatée (DOM, req. HTTP, Ko) dans un quantile.
+                        p.id0 In order to take into account the disparity in the measurements of the 3 indicators (DOM, Ko, HTTP requests), we position the observed value (DOM, req. HTTP, Ko) in a quantile.
                         figure.justify-content-center
-                            img.w-75.fit-picture(src='/img/score-nr-min.png' alt='Formule score NR')
+                            img.w-75.fit-picture(src='img/score-nr-min.png' alt='Formule score NR')
                             figcaption With : Qtil: Page weight in bytes and K_x: Conversion factor of the usage in energy consumed.
                         h3.inrFontColor.pt-5 NR index (rating from A to G)
                         p Once the NR score is obtained, we rank this value by a scale from A to G (European standard) and we obtain a rank.
@@ -32,7 +32,7 @@ block content
                     p.id0 The calculated electricity consumption is translated into greenhouse gas emissions based on the emission factor of the selected geographical area (here France).
                     p.id0 The emission factor reflects the carbon intensity of electricity production, given the electricity mix in force in the geographical area:
                     figure.justify-content-center
-                        img.w-100.fit-picture(src='/img/gesre-min.png' alt='Formule score NR')
+                        img.w-100.fit-picture(src='img/gesre-min.png' alt='Formule score NR')
                         figcaption  With : P: Page weight in bytes, T: Average time spent per page on the site in minutes (default value = 2.31667 min), K_x: Conversion factor of the usage in energy consumed and F_x: Emission factor of the electricity of a region.
             .col-6.text-center.border
                 .py-5.px-5(style="height:100%")
@@ -48,7 +48,7 @@ block content
                         p
                         p.id0  We used the following formula to calculate the electricity consumption in kWh of a site :
                         figure.justify-content-center
-                            img.w-100.fit-picture(src='/img/eaure-min.png' alt='Formule KW/H total')
+                            img.w-100.fit-picture(src='img/eaure-min.png' alt='Formule KW/H total')
                             figcaption With : P: Page weight in bytes, T: Average time spent per page on the site in minutes (default value = 2.31667 min) and K_x: Conversion factor from usage to energy consumption.
 
         .row.justify-content-center.text-center

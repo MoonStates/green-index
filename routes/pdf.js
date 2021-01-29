@@ -67,7 +67,7 @@ async function pdf(url, req) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto('http://localhost:3000/result/template/' + url, {waitUntil: 'networkidle2'});
+    await page.goto(process.env.URI_WEB + 'result/template/' + url, {waitUntil: 'networkidle2'});
     await page.pdf({
         path: filename,
         height: 1920 / 0.75,
@@ -86,7 +86,7 @@ async function pdf_list(url, req) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto('http://localhost:3000/result/template/list/' + url, {waitUntil: 'networkidle2'});
+    await page.goto(process.env.URI_WEB + 'result/template/list/' + url, {waitUntil: 'networkidle2'});
     await page.pdf({
         path: filename,
         height: 1920 / 0.75,
